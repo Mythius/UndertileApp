@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>ANIMATION</title>
+        <style>
+            #game{
+                background-color: black;
+                display: grid;
+                width: 750px;
+                grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+                border: 2px solid black;
+            }
+            
+            .tile{
+                width: 50px;
+                height: 50px;
+            }
+            #player{
+                width: 45px;
+                height: 45px;
+                background-color: black;
+                border-radius: 25px;
+                position: absolute;
+                transition-property: top left;
+                transition-duration: .3s;
+                top: 95;
+                left: 13;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>UnderTile</h1>
+        <hr>
+        <div id=game>
+            <div id=player></div>
+        </div>
+        <p id=display></p>
+        <script>
+            function obj(id){return document.getElementById(id);}
+            var game=obj('game');
+            var topPos = game.offsetLeft;
+            function random(min,max){return Math.floor(min+Math.random()*(max-min));}
+            var colors=['red','blue','yellow','purple','green','orange','pink'];
+            for(var a=0;a<20;a++){
+                for(var b=0;b<6;b++){
+                    var tile=document.createElement('div');
+                    var c=colors[random(0,7)];
+                    tile.style.backgroundColor=c;
+                    tile.setAttribute('col',c);
+                    game.appendChild(tile);
+                    tile.classList.add('tile');
+                }
+            }
+            var tiles=document.getElementsByTagName('div');
+            var grid=[],iRequest=[];
+            for(var i=2;i<tiles.length;i++){
+                grid.push(tiles[i].style.backgroundColor);
+            }
+            var xp=13, yp=95, x=1,y=1,player=obj('player');
+            document.addEventListener('keydown',function(ev){
+                var handled = new Boolean();
+                handled=false;
+                switch(ev.keyCode){
+                    case 38: rMove(0,-1); handled=true; break;
+                    case 40: rMove(0,1);  handled=true; break;
+                    case 39: rMove(1,0);  handled=true; break;
+                    case 37: rMove(-1,0);  handled=true; break;
+                }
+                if(handled){
+                    ev.preventDefault;
+                }
+            });
+            
+            function rMove(dx,dy){
+                iRequest.push(x+dx,y+dy);
+                obj('display').innerHTML=iRequest.last();
+            }
+            
+            function iRequest(x,y){
+                iRequest.push(grid[pos(x,y)]);
+                return grid[pos(x,y)];
+            }
+            
+            function pos(x,y){
+                return y*20-19+x-1;   
+            }
+            
+            Array.prototype.last = function(){
+                return this[this.length];
+            }
+            
+            function move(cx,cy){
+                x+=cx;
+                y+=cy;
+                xp+=cx*50;
+                yp+=cy*50;
+                player.style.top=xp;
+                player.style.left=yp;
+            }
+            
+        </script>
+    </body>
+</html>
