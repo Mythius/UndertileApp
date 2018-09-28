@@ -33,7 +33,7 @@
             #arrows{
                 display: grid;
                 width: 750px;
-                grid-template-columns: repeat(auto-fill, minmax(180px,1fr));
+                grid-template-columns: repeat(auto-fill, minmax(150px,1fr));
             }
             button{
                 height: 40px;
@@ -45,6 +45,7 @@
             <div id=player></div>
         </div>
         <div id=arrows>
+            <button id=r>Restart</button>
             <button id=a>&lt;</button>
             <button id=b>^</button>
             <button id=c>v</button>
@@ -75,7 +76,7 @@
                 grid.push(tiles[i].style.backgroundColor);
             }
             var xp=5, yp=5, x=1,y=1,player=obj('player'),flavor='blank';
-            var key={up: 38,down: 40, left: 37, right: 39};
+            var key={up: 38,down: 40, left: 37, right: 39,space: 32};
             document.addEventListener('keydown',function(ev){
                 var handled = new Boolean();
                 handled=false;
@@ -84,6 +85,7 @@
                     case key.down: rMove(0,1); handled=true; break;
                     case key.left: rMove(-1,0); handled=true; break;
                     case key.right: rMove(1,0); handled=true; break;
+                    case key.space: location.reload(); break;
                 }
                 if(handled){
                     ev.preventDefault();
@@ -95,6 +97,7 @@
                 obj('b').addEventListener('click',function(){rMove(0,-1)});
                 obj('c').addEventListener('click',function(){rMove(0,1)});
                 obj('d').addEventListener('click',function(){rMove(1,0)});
+                obj('r').addEventListener('click',function(){location.reload();});
             }
             function rMove(dx,dy){
                 if(playing){
