@@ -1,2 +1,2 @@
 # UndertileApp
-This going to be a phonegap application eventually... not quite sure when though.
+Currently this is the Undertale Tile Minigame. Maybe eventually it will become a mobile application
