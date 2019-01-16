@@ -149,10 +149,11 @@ function gameWin(){
     win.style.margin='auto';
     document.body.appendChild(win);
 }
+var ts=document.getElementsByClassName('tile');
 if(addReq(1,1)=='orange'){flavor='orange';}
 function addButtons(){
-    for(var i=2;i<tiles.length;i++){
-        tiles[i].addEventListener('click',function(){
+    for(var i in ts){
+        ts[i].addEventListener('click',function(){
             var color=prompt('Change to color');
             if(colors.contains(color)||color=='pink'){
                 this.style.backgroundColor=(color=='pink')?'#faf':color;
