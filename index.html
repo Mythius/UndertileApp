@@ -90,7 +90,7 @@
                 var a;
                 xml('https://rawgit.com/Mythius/UndertileApp/master/levels.txt',function(e){
                     a=e.split('\n');
-                    href+=a[random(0,a.length-1)];
+                    href+=a[random(0,a.length)];
                     location.href=href;
                 });
             });
