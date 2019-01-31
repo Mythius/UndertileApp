@@ -202,6 +202,7 @@ function remBox(){
     }
 }
 addButtons();
+obj ('del').addEventListener ('click',function (){deliver ();});
 function deliver(){
     var c='';
     for(var i=2;i<tiles.length-1;i++){
@@ -209,5 +210,5 @@ function deliver(){
         if(co=='rgb(255, 170, 255)'){co='#faf';}
         c+=colors.indexOf(co);
     }
-    console.log(c+','+width+'.'+height);
+    obj ('display').innerHTML=c+','+width+'.'+height;
 }
